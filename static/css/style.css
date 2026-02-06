@@ -1,0 +1,700 @@
+/* ===========================================
+   Split-It - Material You Design System
+   Android 12 Material You Inspired Theme
+   =========================================== */
+
+/* 1. Material You Design Tokens */
+:root {
+    /* Primary Palette - Purple Tone */
+    --md-primary: #6750A4;
+    --md-on-primary: #FFFFFF;
+    --md-primary-container: #EADDFF;
+    --md-on-primary-container: #21005E;
+
+    /* Secondary Palette */
+    --md-secondary: #625B71;
+    --md-on-secondary: #FFFFFF;
+    --md-secondary-container: #E8DEF8;
+    --md-on-secondary-container: #1E192B;
+
+    /* Tertiary Palette */
+    --md-tertiary: #7D5260;
+    --md-on-tertiary: #FFFFFF;
+    --md-tertiary-container: #FFD8E4;
+    --md-on-tertiary-container: #370B1E;
+
+    /* Error Palette */
+    --md-error: #B3261E;
+    --md-on-error: #FFFFFF;
+    --md-error-container: #F9DEDC;
+    --md-on-error-container: #410E0B;
+
+    /* Surface & Background - Dark Theme */
+    --md-surface: #1C1B1F;
+    --md-surface-dim: #141218;
+    --md-surface-bright: #3B383E;
+    --md-surface-container-lowest: #0F0D13;
+    --md-surface-container-low: #1D1B20;
+    --md-surface-container: #211F26;
+    --md-surface-container-high: #2B2930;
+    --md-surface-container-highest: #36343B;
+    --md-on-surface: #E6E1E5;
+    --md-on-surface-variant: #CAC4D0;
+
+    /* Outline */
+    --md-outline: #938F99;
+    --md-outline-variant: #49454F;
+
+    /* Accent Colors */
+    --md-accent-pink: #D0BCFF;
+    --md-accent-gradient: linear-gradient(135deg, #6750A4 0%, #D0BCFF 100%);
+
+    /* Border Radius - Material You Specs */
+    --md-radius-xs: 8px;
+    --md-radius-sm: 12px;
+    --md-radius-md: 16px;
+    --md-radius-lg: 28px;
+    --md-radius-full: 100px;
+
+    /* Elevation */
+    --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --md-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    /* Transitions */
+    --md-transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
+    --md-transition-normal: 300ms cubic-bezier(0.2, 0, 0, 1);
+    --md-transition-slow: 500ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* 2. Global Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Google Sans', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--md-surface-dim);
+    color: var(--md-on-surface);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* 3. Login Page - Visual Side */
+.visual-side {
+    width: 50%;
+    background: var(--md-accent-gradient);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Material You Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 48px;
+    border-radius: var(--md-radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 10;
+    text-align: center;
+    color: white;
+}
+
+.glass-card h1 {
+    font-size: 3.5rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.glass-card p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    font-weight: 400;
+}
+
+/* Animated Floating Shapes - Softer Colors */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float 12s infinite ease-in-out;
+    filter: blur(1px);
+}
+
+.c1 {
+    width: 220px;
+    height: 220px;
+    background: var(--md-primary-container);
+    top: -60px;
+    left: -60px;
+}
+
+.c2 {
+    width: 320px;
+    height: 320px;
+    background: var(--md-tertiary-container);
+    bottom: -120px;
+    right: -80px;
+    animation-delay: -6s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(25px, 40px) scale(1.05);
+    }
+}
+
+/* 4. Login Page - Form Side */
+.form-side {
+    width: 50%;
+    background: var(--md-surface);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-container {
+    width: 340px;
+    animation: fadeIn 0.4s var(--md-transition-normal);
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    margin-bottom: 24px;
+    color: var(--md-on-surface);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.25px;
+}
+
+/* Material You Filled Text Fields */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--md-on-surface-variant);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: var(--md-radius-md) var(--md-radius-md) 0 0;
+    background: var(--md-surface-container-highest);
+    color: var(--md-on-surface);
+    font-size: 1rem;
+    outline: none;
+    border-bottom: 2px solid var(--md-outline);
+    transition: var(--md-transition-fast);
+}
+
+.input-group input:focus {
+    border-bottom-color: var(--md-primary);
+    background: var(--md-surface-container-high);
+}
+
+.input-group input::placeholder {
+    color: var(--md-on-surface-variant);
+    opacity: 0.7;
+}
+
+/* Material You Filled Buttons */
+.btn-primary {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border: none;
+    border-radius: var(--md-radius-full);
+    cursor: pointer;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    transition: var(--md-transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: color-mix(in srgb, var(--md-primary) 92%, white);
+    box-shadow: var(--md-elevation-1);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Ripple Effect Base */
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.btn-primary:active::after {
+    opacity: 1;
+}
+
+.switch-text {
+    margin-top: 20px;
+    font-size: 0.875rem;
+    text-align: center;
+    color: var(--md-on-surface-variant);
+}
+
+.switch-text a {
+    color: var(--md-primary);
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--md-transition-fast);
+}
+
+.switch-text a:hover {
+    text-decoration: underline;
+}
+
+/* Material You Alerts/Snackbars */
+.alert {
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    border-radius: var(--md-radius-sm);
+    width: 340px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.alert.error {
+    background: var(--md-error-container);
+    color: var(--md-on-error-container);
+}
+
+.alert.success {
+    background: #C8E6C9;
+    color: #1B5E20;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================================
+   5. DASHBOARD STYLES - Material You
+   =========================================== */
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    background: var(--md-surface-dim);
+    color: var(--md-on-surface);
+}
+
+/* Navigation Rail / Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--md-surface-container);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--md-outline-variant);
+}
+
+.logo h2 {
+    margin-bottom: 40px;
+    color: var(--md-primary);
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.user-info {
+    margin-bottom: 32px;
+    padding: 16px;
+    background: var(--md-surface-container-high);
+    border-radius: var(--md-radius-md);
+}
+
+.user-info p {
+    color: var(--md-on-surface-variant);
+    font-size: 0.8125rem;
+    margin-bottom: 4px;
+}
+
+.user-info h3 {
+    color: var(--md-on-surface);
+    font-weight: 500;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.nav-links li {
+    margin-bottom: 8px;
+}
+
+.nav-links a {
+    display: block;
+    text-decoration: none;
+    color: var(--md-on-surface-variant);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: var(--md-radius-full);
+    transition: var(--md-transition-fast);
+}
+
+.nav-links a:hover {
+    background: var(--md-surface-container-highest);
+    color: var(--md-on-surface);
+}
+
+.nav-links li.active a {
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+}
+
+/* Logout Button */
+.btn-logout {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--md-error);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 12px 16px;
+    border-radius: var(--md-radius-full);
+    transition: var(--md-transition-fast);
+}
+
+.btn-logout:hover {
+    background: var(--md-error-container);
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 32px 40px;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+/* Create Group Form */
+.create-group-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.create-group-form input {
+    padding: 14px 20px;
+    border-radius: var(--md-radius-full);
+    border: 1px solid var(--md-outline);
+    background: var(--md-surface-container);
+    color: var(--md-on-surface);
+    font-size: 0.875rem;
+    width: 240px;
+    outline: none;
+    transition: var(--md-transition-fast);
+}
+
+.create-group-form input:focus {
+    border-color: var(--md-primary);
+    background: var(--md-surface-container-high);
+}
+
+.create-group-form input::placeholder {
+    color: var(--md-on-surface-variant);
+}
+
+/* Small Filled Button */
+.btn-small {
+    padding: 14px 24px;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border: none;
+    border-radius: var(--md-radius-full);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: var(--md-transition-fast);
+    white-space: nowrap;
+}
+
+.btn-small:hover {
+    background: color-mix(in srgb, var(--md-primary) 88%, white);
+    box-shadow: var(--md-elevation-1);
+}
+
+.btn-small:active {
+    transform: scale(0.97);
+}
+
+/* Group Cards Grid */
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Material You Cards with Tonal Elevation */
+.group-card {
+    background: var(--md-surface-container);
+    border: none;
+    padding: 24px;
+    border-radius: var(--md-radius-lg);
+    cursor: pointer;
+    transition: var(--md-transition-normal);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.group-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--md-primary);
+    opacity: 0;
+    transition: opacity var(--md-transition-fast);
+}
+
+.group-card:hover {
+    transform: translateY(-6px);
+    background: var(--md-surface-container-high);
+    box-shadow: var(--md-elevation-2);
+}
+
+.group-card:hover::before {
+    opacity: 0.08;
+}
+
+.group-card:active {
+    transform: translateY(-2px);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.group-card h3 {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: var(--md-on-surface);
+}
+
+.group-card p {
+    font-size: 0.8125rem;
+    color: var(--md-on-surface-variant);
+}
+
+/* Empty State */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--md-on-surface-variant);
+}
+
+.empty-state h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--md-on-surface);
+}
+
+.empty-state p {
+    font-size: 0.875rem;
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin-bottom: 24px;
+}
+
+.flash-messages .alert {
+    width: auto;
+    display: inline-block;
+}
+
+/* ===========================================
+   6. Utility Classes
+   =========================================== */
+
+.glass-panel {
+    background: var(--md-surface-container);
+    backdrop-filter: blur(20px);
+}
+
+.glass-card-hover {
+    transition: var(--md-transition-normal);
+}
+
+.glass-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--md-elevation-2);
+}
+
+/* --- ACTIVITY LOG DRAWER (Slide-Out Panel) --- */
+.activity-drawer {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    /* Hidden by default */
+    width: 400px;
+    height: 100vh;
+    background: var(--md-surface);
+    /* Matches your Material Theme */
+    border-left: 1px solid var(--md-outline-variant);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    z-index: 1000;
+    transition: right 0.3s cubic-bezier(0.2, 0, 0, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-drawer.open {
+    right: 0;
+    /* Slide In */
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--md-outline-variant);
+    padding-bottom: 15px;
+}
+
+.drawer-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--md-on-surface);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Filter Inputs inside Drawer */
+.filter-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Activity Items in Drawer */
+.log-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--md-outline-variant);
+    display: flex;
+    justify-content: space-between;
+    background: var(--md-surface-container-low);
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+/* --- FANCY EXPAND BUTTON --- */
+.btn-expand {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--md-outline-variant);
+    background: var(--md-surface-container-high);
+    color: var(--md-primary);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto 0;
+    /* Center it */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--md-elevation-1);
+}
+
+.btn-expand:hover {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    transform: scale(1.1);
+    box-shadow: var(--md-elevation-2);
+}
+
+/* When active, rotate 45 degrees to become an 'X' */
+.btn-expand.active {
+    transform: rotate(135deg);
+    /* 45 + 90 for extra spin */
+    background: var(--md-error-container);
+    color: var(--md-on-error-container);
+    border-color: transparent;
+}

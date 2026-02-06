@@ -1,0 +1,508 @@
+/* ===========================================
+   Split-It - Material You Theme
+   Standalone Theme File with Light/Dark Modes
+   =========================================== */
+
+/* ============================================
+   LIGHT THEME TOKENS
+   ============================================ */
+:root,
+[data-theme="light"] {
+    /* Primary */
+    --md-primary: #6750A4;
+    --md-on-primary: #FFFFFF;
+    --md-primary-container: #EADDFF;
+    --md-on-primary-container: #21005E;
+
+    /* Secondary */
+    --md-secondary: #625B71;
+    --md-on-secondary: #FFFFFF;
+    --md-secondary-container: #E8DEF8;
+    --md-on-secondary-container: #1E192B;
+
+    /* Tertiary */
+    --md-tertiary: #7D5260;
+    --md-on-tertiary: #FFFFFF;
+    --md-tertiary-container: #FFD8E4;
+    --md-on-tertiary-container: #370B1E;
+
+    /* Error */
+    --md-error: #B3261E;
+    --md-on-error: #FFFFFF;
+    --md-error-container: #F9DEDC;
+    --md-on-error-container: #410E0B;
+
+    /* Success (Custom) */
+    --md-success: #2E7D32;
+    --md-success-container: #C8E6C9;
+    --md-on-success-container: #1B5E20;
+
+    /* Surface - Light */
+    --md-surface: #FEF7FF;
+    --md-surface-dim: #DED8E1;
+    --md-surface-bright: #FEF7FF;
+    --md-surface-container-lowest: #FFFFFF;
+    --md-surface-container-low: #F7F2FA;
+    --md-surface-container: #F3EDF7;
+    --md-surface-container-high: #ECE6F0;
+    --md-surface-container-highest: #E6E0E9;
+    --md-on-surface: #1D1B20;
+    --md-on-surface-variant: #49454F;
+
+    /* Outline */
+    --md-outline: #79747E;
+    --md-outline-variant: #CAC4D0;
+
+    /* Inverse */
+    --md-inverse-surface: #322F35;
+    --md-inverse-on-surface: #F5EFF7;
+    --md-inverse-primary: #D0BCFF;
+
+    /* Scrim & Shadow */
+    --md-scrim: #000000;
+    --md-shadow: #000000;
+}
+
+/* ============================================
+   DARK THEME TOKENS
+   ============================================ */
+[data-theme="dark"] {
+    /* Primary */
+    --md-primary: #D0BCFF;
+    --md-on-primary: #381E72;
+    --md-primary-container: #4F378B;
+    --md-on-primary-container: #EADDFF;
+
+    /* Secondary */
+    --md-secondary: #CCC2DC;
+    --md-on-secondary: #332D41;
+    --md-secondary-container: #4A4458;
+    --md-on-secondary-container: #E8DEF8;
+
+    /* Tertiary */
+    --md-tertiary: #EFB8C8;
+    --md-on-tertiary: #492532;
+    --md-tertiary-container: #633B48;
+    --md-on-tertiary-container: #FFD8E4;
+
+    /* Error */
+    --md-error: #F2B8B5;
+    --md-on-error: #601410;
+    --md-error-container: #8C1D18;
+    --md-on-error-container: #F9DEDC;
+
+    /* Success */
+    --md-success: #81C784;
+    --md-success-container: #1B5E20;
+    --md-on-success-container: #C8E6C9;
+
+    /* Surface - Dark */
+    --md-surface: #141218;
+    --md-surface-dim: #141218;
+    --md-surface-bright: #3B383E;
+    --md-surface-container-lowest: #0F0D13;
+    --md-surface-container-low: #1D1B20;
+    --md-surface-container: #211F26;
+    --md-surface-container-high: #2B2930;
+    --md-surface-container-highest: #36343B;
+    --md-on-surface: #E6E1E5;
+    --md-on-surface-variant: #CAC4D0;
+
+    /* Outline */
+    --md-outline: #938F99;
+    --md-outline-variant: #49454F;
+
+    /* Inverse */
+    --md-inverse-surface: #E6E1E5;
+    --md-inverse-on-surface: #1D1B20;
+    --md-inverse-primary: #6750A4;
+}
+
+/* ============================================
+   SHARED DESIGN TOKENS
+   ============================================ */
+:root {
+    /* Border Radius */
+    --md-radius-none: 0;
+    --md-radius-xs: 4px;
+    --md-radius-sm: 8px;
+    --md-radius-md: 12px;
+    --md-radius-lg: 16px;
+    --md-radius-xl: 28px;
+    --md-radius-full: 100px;
+
+    /* Elevation Shadows */
+    --md-elevation-0: none;
+    --md-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --md-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --md-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+    --md-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.3), 0 6px 10px 4px rgba(0, 0, 0, 0.15);
+    --md-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.3), 0 8px 12px 6px rgba(0, 0, 0, 0.15);
+
+    /* Typography Scale */
+    --md-font-family: 'Roboto', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Display */
+    --md-display-large: 500 57px/64px var(--md-font-family);
+    --md-display-medium: 500 45px/52px var(--md-font-family);
+    --md-display-small: 500 36px/44px var(--md-font-family);
+
+    /* Headline */
+    --md-headline-large: 500 32px/40px var(--md-font-family);
+    --md-headline-medium: 500 28px/36px var(--md-font-family);
+    --md-headline-small: 500 24px/32px var(--md-font-family);
+
+    /* Title */
+    --md-title-large: 500 22px/28px var(--md-font-family);
+    --md-title-medium: 500 16px/24px var(--md-font-family);
+    --md-title-small: 500 14px/20px var(--md-font-family);
+
+    /* Body */
+    --md-body-large: 400 16px/24px var(--md-font-family);
+    --md-body-medium: 400 14px/20px var(--md-font-family);
+    --md-body-small: 400 12px/16px var(--md-font-family);
+
+    /* Label */
+    --md-label-large: 500 14px/20px var(--md-font-family);
+    --md-label-medium: 500 12px/16px var(--md-font-family);
+    --md-label-small: 500 11px/16px var(--md-font-family);
+
+    /* State Layers */
+    --md-state-hover: 0.08;
+    --md-state-focus: 0.12;
+    --md-state-pressed: 0.12;
+    --md-state-dragged: 0.16;
+
+    /* Motion */
+    --md-duration-short1: 50ms;
+    --md-duration-short2: 100ms;
+    --md-duration-short3: 150ms;
+    --md-duration-short4: 200ms;
+    --md-duration-medium1: 250ms;
+    --md-duration-medium2: 300ms;
+    --md-duration-medium3: 350ms;
+    --md-duration-medium4: 400ms;
+    --md-duration-long1: 450ms;
+    --md-duration-long2: 500ms;
+
+    --md-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --md-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --md-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --md-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Surface Colors */
+.surface {
+    background: var(--md-surface);
+    color: var(--md-on-surface);
+}
+
+.surface-dim {
+    background: var(--md-surface-dim);
+}
+
+.surface-container {
+    background: var(--md-surface-container);
+}
+
+.surface-container-high {
+    background: var(--md-surface-container-high);
+}
+
+.surface-container-highest {
+    background: var(--md-surface-container-highest);
+}
+
+/* Primary Colors */
+.primary {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+}
+
+.primary-container {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+}
+
+/* Border Radius */
+.rounded-sm {
+    border-radius: var(--md-radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--md-radius-md);
+}
+
+.rounded-lg {
+    border-radius: var(--md-radius-lg);
+}
+
+.rounded-xl {
+    border-radius: var(--md-radius-xl);
+}
+
+.rounded-full {
+    border-radius: var(--md-radius-full);
+}
+
+/* Elevation */
+.elevation-0 {
+    box-shadow: var(--md-elevation-0);
+}
+
+.elevation-1 {
+    box-shadow: var(--md-elevation-1);
+}
+
+.elevation-2 {
+    box-shadow: var(--md-elevation-2);
+}
+
+.elevation-3 {
+    box-shadow: var(--md-elevation-3);
+}
+
+/* ============================================
+   COMPONENTS
+   ============================================ */
+
+/* Filled Button */
+.md-button-filled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    min-height: 40px;
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border: none;
+    border-radius: var(--md-radius-full);
+    font: var(--md-label-large);
+    cursor: pointer;
+    transition: box-shadow var(--md-duration-short3) var(--md-easing-standard),
+        background var(--md-duration-short3) var(--md-easing-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+.md-button-filled:hover {
+    box-shadow: var(--md-elevation-1);
+}
+
+.md-button-filled:active {
+    transform: scale(0.98);
+}
+
+/* Outlined Button */
+.md-button-outlined {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    min-height: 40px;
+    background: transparent;
+    color: var(--md-primary);
+    border: 1px solid var(--md-outline);
+    border-radius: var(--md-radius-full);
+    font: var(--md-label-large);
+    cursor: pointer;
+    transition: var(--md-duration-short3) var(--md-easing-standard);
+}
+
+.md-button-outlined:hover {
+    background: color-mix(in srgb, var(--md-primary) 8%, transparent);
+}
+
+/* Tonal Button */
+.md-button-tonal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    min-height: 40px;
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+    border: none;
+    border-radius: var(--md-radius-full);
+    font: var(--md-label-large);
+    cursor: pointer;
+    transition: var(--md-duration-short3) var(--md-easing-standard);
+}
+
+.md-button-tonal:hover {
+    box-shadow: var(--md-elevation-1);
+}
+
+/* Text Field - Filled */
+.md-textfield {
+    position: relative;
+    width: 100%;
+}
+
+.md-textfield input {
+    width: 100%;
+    padding: 16px;
+    padding-top: 24px;
+    background: var(--md-surface-container-highest);
+    border: none;
+    border-radius: var(--md-radius-xs) var(--md-radius-xs) 0 0;
+    border-bottom: 2px solid var(--md-on-surface-variant);
+    font: var(--md-body-large);
+    color: var(--md-on-surface);
+    outline: none;
+    transition: border-color var(--md-duration-short3) var(--md-easing-standard);
+}
+
+.md-textfield input:focus {
+    border-bottom-color: var(--md-primary);
+}
+
+.md-textfield label {
+    position: absolute;
+    left: 16px;
+    top: 8px;
+    font: var(--md-body-small);
+    color: var(--md-on-surface-variant);
+    pointer-events: none;
+}
+
+/* Card */
+.md-card {
+    background: var(--md-surface-container);
+    border-radius: var(--md-radius-md);
+    padding: 16px;
+    transition: var(--md-duration-medium1) var(--md-easing-standard);
+}
+
+.md-card-elevated {
+    box-shadow: var(--md-elevation-1);
+}
+
+.md-card-elevated:hover {
+    box-shadow: var(--md-elevation-2);
+}
+
+/* Chip */
+.md-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--md-surface-container-high);
+    border: 1px solid var(--md-outline);
+    border-radius: var(--md-radius-sm);
+    font: var(--md-label-large);
+    color: var(--md-on-surface);
+    cursor: pointer;
+    transition: var(--md-duration-short3) var(--md-easing-standard);
+}
+
+.md-chip:hover {
+    background: var(--md-surface-container-highest);
+}
+
+.md-chip.selected {
+    background: var(--md-secondary-container);
+    border-color: transparent;
+    color: var(--md-on-secondary-container);
+}
+
+/* FAB - Floating Action Button */
+.md-fab {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    border: none;
+    border-radius: var(--md-radius-lg);
+    box-shadow: var(--md-elevation-3);
+    cursor: pointer;
+    font-size: 24px;
+    transition: var(--md-duration-medium1) var(--md-easing-emphasized);
+}
+
+.md-fab:hover {
+    box-shadow: var(--md-elevation-4);
+}
+
+.md-fab-extended {
+    width: auto;
+    padding: 16px 20px;
+    gap: 12px;
+    font: var(--md-label-large);
+}
+
+/* Snackbar */
+.md-snackbar {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--md-inverse-surface);
+    color: var(--md-inverse-on-surface);
+    border-radius: var(--md-radius-xs);
+    box-shadow: var(--md-elevation-3);
+    font: var(--md-body-medium);
+}
+
+/* Navigation Rail */
+.md-nav-rail {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    background: var(--md-surface);
+}
+
+.md-nav-rail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 0;
+    width: 100%;
+    color: var(--md-on-surface-variant);
+    text-decoration: none;
+    font: var(--md-label-medium);
+    transition: var(--md-duration-short3) var(--md-easing-standard);
+}
+
+.md-nav-rail-item .icon-container {
+    width: 56px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--md-radius-lg);
+    transition: inherit;
+}
+
+.md-nav-rail-item:hover .icon-container {
+    background: var(--md-surface-container);
+}
+
+.md-nav-rail-item.active .icon-container {
+    background: var(--md-secondary-container);
+}
+
+.md-nav-rail-item.active {
+    color: var(--md-on-secondary-container);
+}
+
+/* ============================================
+   THEME TOGGLE HELPER
+   ============================================ */
+/* Add this JS to toggle themes:
+   document.body.setAttribute('data-theme', 'dark'); // or 'light'
+*/

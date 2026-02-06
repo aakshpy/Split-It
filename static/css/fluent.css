@@ -1,0 +1,2165 @@
+/* ===========================================
+   Split-It - Windows 11 Fluent Design System
+   Mica, Acrylic, Glassmorphism & Motion
+   =========================================== */
+
+/* ============================================
+   1. DESIGN TOKENS
+   ============================================ */
+
+:root {
+    /* ---- Primary Color Palette (Context-Agnostic) ---- */
+    --fluent-accent: #60CDFF;
+    --fluent-accent-hover: #8FD8FF;
+    --fluent-accent-pressed: #4CC2FF;
+    --fluent-accent-subtle: rgba(96, 205, 255, 0.15);
+
+    /* ---- Semantic Colors ---- */
+    --fluent-success: #6CCB5F;
+    --fluent-success-bg: rgba(108, 203, 95, 0.15);
+    --fluent-warning: #FCE100;
+    --fluent-warning-bg: rgba(252, 225, 0, 0.15);
+    --fluent-error: #FF99A4;
+    --fluent-error-bg: rgba(255, 153, 164, 0.15);
+
+    /* ---- Surface Colors (Dark Theme) ---- */
+    --fluent-bg-solid: #202020;
+    --fluent-bg-mica: #2D2D2D;
+    --fluent-bg-mica-alt: #282828;
+
+    /* Acrylic Layers */
+    --fluent-surface-card: rgba(255, 255, 255, 0.05);
+    --fluent-surface-card-hover: rgba(255, 255, 255, 0.08);
+    --fluent-surface-card-pressed: rgba(255, 255, 255, 0.03);
+    --fluent-surface-flyout: rgba(44, 44, 44, 0.96);
+    --fluent-surface-input: rgba(255, 255, 255, 0.06);
+    --fluent-surface-input-hover: rgba(255, 255, 255, 0.08);
+
+    /* ---- Text Colors ---- */
+    --fluent-text-primary: #FFFFFF;
+    --fluent-text-secondary: rgba(255, 255, 255, 0.7);
+    --fluent-text-tertiary: rgba(255, 255, 255, 0.5);
+    --fluent-text-disabled: rgba(255, 255, 255, 0.36);
+    --fluent-text-accent: #60CDFF;
+
+    /* ---- Borders & Dividers ---- */
+    --fluent-border-subtle: rgba(255, 255, 255, 0.08);
+    --fluent-border-default: rgba(255, 255, 255, 0.12);
+    --fluent-border-strong: rgba(255, 255, 255, 0.18);
+    --fluent-divider: rgba(255, 255, 255, 0.08);
+
+    /* ---- Shadows (Soft & Diffused) ---- */
+    --fluent-shadow-2: 0 2px 4px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+    --fluent-shadow-4: 0 4px 8px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+    --fluent-shadow-8: 0 8px 16px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+    --fluent-shadow-16: 0 16px 32px rgba(0, 0, 0, 0.18), 0 0 4px rgba(0, 0, 0, 0.12);
+    --fluent-shadow-glow: 0 0 20px rgba(96, 205, 255, 0.3);
+
+    /* ---- Border Radius ---- */
+    --fluent-radius-sm: 4px;
+    --fluent-radius-md: 8px;
+    --fluent-radius-lg: 12px;
+    --fluent-radius-xl: 16px;
+    --fluent-radius-full: 9999px;
+
+    /* ---- Spacing (4px base unit) ---- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+
+    /* ---- Typography ---- */
+    --font-family: 'Segoe UI Variable', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-caption: 12px;
+    --font-size-body: 14px;
+    --font-size-body-lg: 16px;
+    --font-size-subtitle: 18px;
+    --font-size-title: 24px;
+    --font-size-display: 48px;
+
+    /* ---- Transitions (Windows Easing) ---- */
+    --ease-standard: cubic-bezier(0.1, 0.9, 0.2, 1);
+    --ease-decelerate: cubic-bezier(0, 0, 0, 1);
+    --ease-accelerate: cubic-bezier(1, 0, 1, 1);
+    --duration-ultra-fast: 50ms;
+    --duration-faster: 100ms;
+    --duration-fast: 150ms;
+    --duration-normal: 200ms;
+    --duration-slow: 300ms;
+    --duration-slower: 400ms;
+}
+
+/* ============================================
+   2. GLOBAL RESET & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    line-height: 1.5;
+    color: var(--fluent-text-primary);
+    background: var(--fluent-bg-solid);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ============================================
+   3. MICA & ACRYLIC MATERIALS
+   ============================================ */
+
+/* Mica Base - Subtle textured background */
+.mica-bg {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+        var(--fluent-bg-mica);
+    position: relative;
+}
+
+.mica-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+}
+
+/* Mica Alternative */
+.mica-alt {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        var(--fluent-bg-mica-alt);
+}
+
+/* Acrylic Material - Translucent blur */
+.acrylic {
+    background: var(--fluent-surface-card);
+    backdrop-filter: blur(40px) saturate(125%);
+    -webkit-backdrop-filter: blur(40px) saturate(125%);
+    border: 1px solid var(--fluent-border-subtle);
+}
+
+/* Acrylic Hover State */
+.acrylic-interactive {
+    background: var(--fluent-surface-card);
+    backdrop-filter: blur(40px) saturate(125%);
+    -webkit-backdrop-filter: blur(40px) saturate(125%);
+    border: 1px solid var(--fluent-border-subtle);
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.acrylic-interactive:hover {
+    background: var(--fluent-surface-card-hover);
+    border-color: var(--fluent-border-default);
+    transform: translateY(-2px);
+    box-shadow: var(--fluent-shadow-8);
+}
+
+.acrylic-interactive:active {
+    background: var(--fluent-surface-card-pressed);
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--fluent-shadow-2);
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--fluent-radius-xl);
+    box-shadow: var(--fluent-shadow-8);
+}
+
+/* ============================================
+   4. SMART ANIMATIONS
+   ============================================ */
+
+/* -- Page Enter Animation -- */
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-page-enter {
+    animation: pageEnter var(--duration-slow) var(--ease-decelerate) forwards;
+}
+
+/* -- Fade In Up (Staggered) -- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp var(--duration-slow) var(--ease-decelerate) forwards;
+}
+
+/* Stagger delays */
+.stagger-1 {
+    animation-delay: 50ms;
+}
+
+.stagger-2 {
+    animation-delay: 100ms;
+}
+
+.stagger-3 {
+    animation-delay: 150ms;
+}
+
+.stagger-4 {
+    animation-delay: 200ms;
+}
+
+.stagger-5 {
+    animation-delay: 250ms;
+}
+
+.stagger-6 {
+    animation-delay: 300ms;
+}
+
+/* -- Scale Pop -- */
+@keyframes scalePop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-scale-pop {
+    animation: scalePop var(--duration-slow) var(--ease-standard) forwards;
+}
+
+/* -- Slide In From Right (for drawers) -- */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* -- Gentle Float (Ambient) -- */
+@keyframes gentleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(10px, -10px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(5px, 5px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate(-5px, -5px) rotate(0.5deg);
+    }
+}
+
+.animate-float {
+    animation: gentleFloat 15s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: gentleFloat 18s ease-in-out infinite;
+    animation-delay: -6s;
+}
+
+/* -- Pulse Glow (for focus/active states) -- */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(96, 205, 255, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(96, 205, 255, 0);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* -- Shimmer Loading -- */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.loading-shimmer {
+    background: linear-gradient(90deg,
+            var(--fluent-surface-card) 25%,
+            var(--fluent-surface-card-hover) 50%,
+            var(--fluent-surface-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* -- Ripple Effect -- */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.ripple-effect:active::after {
+    animation: ripple var(--duration-slow) var(--ease-decelerate);
+}
+
+/* ============================================
+   5. LAYOUT COMPONENTS
+   ============================================ */
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: var(--fluent-bg-solid);
+}
+
+/* ============================================
+   6. SIDEBAR / NAVIGATION PANE
+   ============================================ */
+
+.sidebar {
+    width: 280px;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--fluent-divider);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 30%),
+        var(--fluent-bg-mica-alt);
+    position: relative;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+}
+
+.logo h2 {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--fluent-accent);
+    margin-bottom: var(--space-10);
+    letter-spacing: -0.5px;
+}
+
+.user-info {
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-8);
+    backdrop-filter: blur(20px);
+}
+
+.user-info p {
+    font-size: var(--font-size-caption);
+    color: var(--fluent-text-secondary);
+    margin-bottom: var(--space-1);
+}
+
+.user-info h3 {
+    font-size: var(--font-size-body-lg);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    flex: 1;
+}
+
+.nav-links li {
+    margin-bottom: var(--space-1);
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--fluent-radius-md);
+    text-decoration: none;
+    color: var(--fluent-text-secondary);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+    position: relative;
+}
+
+.nav-links a:hover {
+    background: var(--fluent-surface-card-hover);
+    color: var(--fluent-text-primary);
+}
+
+.nav-links a:active {
+    transform: scale(0.98);
+    background: var(--fluent-surface-card-pressed);
+}
+
+/* Active State with Indicator */
+.nav-links li.active a {
+    background: var(--fluent-accent-subtle);
+    color: var(--fluent-accent);
+}
+
+.nav-links li.active a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background: var(--fluent-accent);
+    border-radius: var(--fluent-radius-full);
+}
+
+/* Logout Button */
+.logout-section {
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--fluent-divider);
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--fluent-radius-md);
+    text-decoration: none;
+    color: var(--fluent-error);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn-logout:hover {
+    background: var(--fluent-error-bg);
+}
+
+.btn-logout:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   7. MAIN CONTENT AREA
+   ============================================ */
+
+.main-content {
+    flex: 1;
+    padding: var(--space-8) var(--space-10);
+    overflow-y: auto;
+    background: var(--fluent-bg-solid);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-8);
+}
+
+header h1 {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    letter-spacing: -0.3px;
+}
+
+/* ============================================
+   8. BUTTONS
+   ============================================ */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: var(--fluent-accent);
+    color: #000000;
+    border: none;
+    border-radius: var(--fluent-radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: var(--fluent-accent-hover);
+    box-shadow: var(--fluent-shadow-4);
+}
+
+.btn-primary:active {
+    background: var(--fluent-accent-pressed);
+    transform: scale(0.97);
+    box-shadow: none;
+}
+
+.btn-primary:focus-visible {
+    outline: 2px solid var(--fluent-accent);
+    outline-offset: 2px;
+}
+
+/* Secondary Button (Outlined) */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background: transparent;
+    color: var(--fluent-text-primary);
+    border: 1px solid var(--fluent-border-default);
+    border-radius: var(--fluent-radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn-secondary:hover {
+    background: var(--fluent-surface-card-hover);
+    border-color: var(--fluent-border-strong);
+}
+
+.btn-secondary:active {
+    transform: scale(0.97);
+    background: var(--fluent-surface-card-pressed);
+}
+
+/* Small Button */
+.btn-small {
+    padding: var(--space-2) var(--space-5);
+    background: var(--fluent-accent);
+    color: #000000;
+    border: none;
+    border-radius: var(--fluent-radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.btn-small:hover {
+    background: var(--fluent-accent-hover);
+    box-shadow: var(--fluent-shadow-2);
+}
+
+.btn-small:active {
+    transform: scale(0.97);
+}
+
+/* Icon Button */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-secondary);
+    cursor: pointer;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn-icon:hover {
+    background: var(--fluent-surface-card-hover);
+    color: var(--fluent-text-primary);
+}
+
+.btn-icon:active {
+    transform: scale(0.95);
+}
+
+/* ============================================
+   9. INPUT FIELDS
+   ============================================ */
+
+.input-group {
+    margin-bottom: var(--space-5);
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    color: var(--fluent-text-secondary);
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--fluent-surface-input);
+    border: 1px solid var(--fluent-border-default);
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    outline: none;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.input-group input:hover,
+.input-group select:hover {
+    background: var(--fluent-surface-input-hover);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--fluent-accent);
+    box-shadow: 0 0 0 1px var(--fluent-accent);
+    background: var(--fluent-surface-input-hover);
+}
+
+.input-group input::placeholder {
+    color: var(--fluent-text-tertiary);
+}
+
+/* Select Dropdown */
+.input-group select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+/* ============================================
+   10. CARDS
+   ============================================ */
+
+/* Group Card Grid */
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-5);
+}
+
+/* Group Card */
+.group-card {
+    background: var(--fluent-surface-card);
+    backdrop-filter: blur(40px) saturate(125%);
+    -webkit-backdrop-filter: blur(40px) saturate(125%);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-xl);
+    padding: var(--space-6);
+    cursor: pointer;
+    text-align: center;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+    position: relative;
+    overflow: hidden;
+}
+
+.group-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(96, 205, 255, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-standard);
+}
+
+.group-card:hover {
+    background: var(--fluent-surface-card-hover);
+    border-color: var(--fluent-border-default);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--fluent-shadow-8);
+}
+
+.group-card:hover::before {
+    opacity: 1;
+}
+
+.group-card:active {
+    transform: translateY(-2px) scale(0.99);
+    box-shadow: var(--fluent-shadow-4);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-4);
+    display: block;
+    line-height: 1;
+}
+
+.group-card h3 {
+    font-size: var(--font-size-subtitle);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.group-card p {
+    font-size: var(--font-size-caption);
+    color: var(--fluent-text-secondary);
+}
+
+/* Glass Card Hover Utility */
+.glass-card-hover {
+    transition:
+        transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.glass-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--fluent-shadow-8);
+}
+
+/* ============================================
+   11. PANELS & SURFACES
+   ============================================ */
+
+.glass-panel {
+    background: var(--fluent-surface-card);
+    backdrop-filter: blur(40px) saturate(125%);
+    -webkit-backdrop-filter: blur(40px) saturate(125%);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-xl);
+}
+
+.panel {
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-xl);
+    padding: var(--space-6);
+}
+
+/* Section Headers */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-subtitle);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+}
+
+/* ============================================
+   12. LOGIN PAGE
+   ============================================ */
+
+/* Visual Side (Left) */
+.visual-side {
+    width: 50%;
+    background:
+        linear-gradient(135deg, #1a4a5c 0%, #0d2833 50%, #091a1f 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.visual-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(96, 205, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(96, 205, 255, 0.1) 0%, transparent 40%);
+}
+
+/* Login Glass Card */
+.visual-side .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: var(--space-12);
+    border-radius: var(--fluent-radius-xl);
+    text-align: center;
+    z-index: 10;
+    box-shadow: var(--fluent-shadow-16);
+}
+
+.visual-side .glass-card h1 {
+    font-size: var(--font-size-display);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-3);
+    letter-spacing: -1px;
+}
+
+.visual-side .glass-card p {
+    font-size: var(--font-size-body-lg);
+    color: var(--fluent-text-secondary);
+}
+
+/* Floating Decorative Elements */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(60px);
+}
+
+.c1 {
+    width: 300px;
+    height: 300px;
+    background: var(--fluent-accent);
+    top: -80px;
+    left: -80px;
+}
+
+.c2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(96, 205, 255, 0.8) 0%, rgba(108, 203, 95, 0.6) 100%);
+    bottom: -150px;
+    right: -100px;
+}
+
+/* Form Side (Right) */
+.form-side {
+    width: 50%;
+    background: var(--fluent-bg-solid);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: var(--space-8);
+}
+
+.form-container {
+    width: 100%;
+    max-width: 360px;
+}
+
+.form-container h2 {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.3px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Switch Text Link */
+.switch-text {
+    margin-top: var(--space-5);
+    text-align: center;
+    font-size: var(--font-size-body);
+    color: var(--fluent-text-secondary);
+}
+
+.switch-text a {
+    color: var(--fluent-accent);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.switch-text a:hover {
+    color: var(--fluent-accent-hover);
+    text-decoration: underline;
+}
+
+/* ============================================
+   13. ALERTS & NOTIFICATIONS
+   ============================================ */
+
+.alert {
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--fluent-radius-md);
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.alert.error {
+    background: var(--fluent-error-bg);
+    color: var(--fluent-error);
+    border: 1px solid rgba(255, 153, 164, 0.3);
+}
+
+.alert.success {
+    background: var(--fluent-success-bg);
+    color: var(--fluent-success);
+    border: 1px solid rgba(108, 203, 95, 0.3);
+}
+
+.flash-messages {
+    margin-bottom: var(--space-6);
+}
+
+.flash-messages .alert {
+    display: inline-block;
+}
+
+/* ============================================
+   14. CREATE GROUP FORM (Header)
+   ============================================ */
+
+.create-group-form {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.create-group-form input {
+    padding: var(--space-3) var(--space-4);
+    background: var(--fluent-surface-input);
+    border: 1px solid var(--fluent-border-default);
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    width: 240px;
+    outline: none;
+    transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.create-group-form input:focus {
+    border-color: var(--fluent-accent);
+    box-shadow: 0 0 0 1px var(--fluent-accent);
+}
+
+.create-group-form input::placeholder {
+    color: var(--fluent-text-tertiary);
+}
+
+/* ============================================
+   15. EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-12) var(--space-6);
+    color: var(--fluent-text-secondary);
+}
+
+.empty-state h3 {
+    font-size: var(--font-size-subtitle);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.empty-state p {
+    font-size: var(--font-size-body);
+}
+
+/* ============================================
+   16. ACTIVITY DRAWER
+   ============================================ */
+
+.activity-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    height: 100vh;
+    background: var(--fluent-surface-flyout);
+    backdrop-filter: blur(60px) saturate(150%);
+    -webkit-backdrop-filter: blur(60px) saturate(150%);
+    border-left: 1px solid var(--fluent-border-subtle);
+    box-shadow: var(--fluent-shadow-16);
+    padding: var(--space-6);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+        transform var(--duration-slow) var(--ease-standard),
+        opacity var(--duration-slow) var(--ease-standard);
+}
+
+.activity-drawer.open {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--fluent-divider);
+    margin-bottom: var(--space-5);
+}
+
+.drawer-header h2 {
+    font-size: var(--font-size-subtitle);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin: 0;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+}
+
+.close-btn:hover {
+    background: var(--fluent-surface-card-hover);
+    color: var(--fluent-text-primary);
+}
+
+.filter-row {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+.filter-row input,
+.filter-row select {
+    padding: var(--space-3) var(--space-4);
+    background: var(--fluent-surface-input);
+    border: 1px solid var(--fluent-border-default);
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    outline: none;
+    transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.filter-row input {
+    flex: 2;
+}
+
+.filter-row select {
+    flex: 1;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.filter-row input:focus,
+.filter-row select:focus {
+    border-color: var(--fluent-accent);
+    box-shadow: 0 0 0 1px var(--fluent-accent);
+}
+
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: var(--space-2);
+}
+
+/* Custom Scrollbar */
+.drawer-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.drawer-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.drawer-content::-webkit-scrollbar-thumb {
+    background: var(--fluent-border-default);
+    border-radius: var(--fluent-radius-full);
+}
+
+.drawer-content::-webkit-scrollbar-thumb:hover {
+    background: var(--fluent-border-strong);
+}
+
+/* Log Items */
+.log-item {
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.log-item:hover {
+    background: var(--fluent-surface-card-hover);
+    transform: translateX(-2px);
+}
+
+/* ============================================
+   17. EXPAND BUTTON
+   ============================================ */
+
+.btn-expand {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-default);
+    color: var(--fluent-accent);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: var(--space-4) auto 0;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+    box-shadow: var(--fluent-shadow-2);
+}
+
+.btn-expand:hover {
+    background: var(--fluent-accent-subtle);
+    border-color: var(--fluent-accent);
+    transform: scale(1.1);
+    box-shadow: var(--fluent-shadow-4);
+}
+
+.btn-expand.active {
+    transform: rotate(45deg);
+    background: var(--fluent-error-bg);
+    border-color: var(--fluent-error);
+    color: var(--fluent-error);
+}
+
+/* ============================================
+   18. BALANCE CARDS (Group Details)
+   ============================================ */
+
+.balance-grid {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.balance-card {
+    width: 200px;
+    background: var(--fluent-surface-card);
+    backdrop-filter: blur(40px) saturate(125%);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-xl);
+    padding: var(--space-5);
+    text-align: center;
+    transition:
+        transform var(--duration-normal) var(--ease-standard),
+        box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.balance-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--fluent-shadow-4);
+}
+
+.balance-card h4 {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.balance-card h2 {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.balance-positive {
+    color: var(--fluent-success);
+}
+
+.balance-negative {
+    color: var(--fluent-error);
+}
+
+.balance-neutral {
+    color: var(--fluent-text-tertiary);
+}
+
+.balance-tag {
+    display: inline-block;
+    font-size: var(--font-size-caption);
+    font-weight: 500;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--fluent-radius-md);
+}
+
+.tag-positive {
+    background: var(--fluent-success-bg);
+    color: var(--fluent-success);
+}
+
+.tag-negative {
+    background: var(--fluent-error-bg);
+    color: var(--fluent-error);
+}
+
+.tag-neutral {
+    background: var(--fluent-surface-card-hover);
+    color: var(--fluent-text-secondary);
+}
+
+/* Breakdown Panel */
+.breakdown-panel {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--fluent-divider);
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+/* ============================================
+   19. EXPENSE LIST
+   ============================================ */
+
+.expense-item {
+    background: var(--fluent-surface-card);
+    border: 1px solid var(--fluent-border-subtle);
+    border-radius: var(--fluent-radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.expense-item:hover {
+    background: var(--fluent-surface-card-hover);
+    transform: translateX(4px);
+}
+
+.expense-item h4 {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.expense-item .payer {
+    font-size: var(--font-size-caption);
+    color: var(--fluent-text-secondary);
+}
+
+.expense-item .amount {
+    font-size: var(--font-size-subtitle);
+    font-weight: 600;
+    color: var(--fluent-accent);
+}
+
+.expense-item .date {
+    font-size: var(--font-size-caption);
+    color: var(--fluent-text-tertiary);
+}
+
+/* ============================================
+   20. SETTLE UP SECTION
+   ============================================ */
+
+.settle-section {
+    border: 1px solid rgba(108, 203, 95, 0.2);
+}
+
+.settle-section h3 {
+    color: var(--fluent-success);
+}
+
+.btn-settle {
+    background: var(--fluent-success);
+    color: #000000;
+    font-weight: 600;
+}
+
+.btn-settle:hover {
+    background: #7dd874;
+    box-shadow: var(--fluent-shadow-4);
+}
+
+/* ============================================
+   21. MEMBERS LIST
+   ============================================ */
+
+.member-list {
+    list-style: none;
+}
+
+.member-item {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--fluent-divider);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--fluent-text-primary);
+    font-size: var(--font-size-body);
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        padding-left var(--duration-fast) var(--ease-standard);
+}
+
+.member-item:hover {
+    background: var(--fluent-surface-card);
+    padding-left: var(--space-2);
+    border-radius: var(--fluent-radius-md);
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   22. UTILITY CLASSES
+   ============================================ */
+
+.mb-20 {
+    margin-bottom: var(--space-5);
+}
+
+.mb-40 {
+    margin-bottom: var(--space-10);
+}
+
+.mt-20 {
+    margin-top: var(--space-5);
+}
+
+.p-24 {
+    padding: var(--space-6);
+}
+
+.text-accent {
+    color: var(--fluent-accent);
+}
+
+.text-success {
+    color: var(--fluent-success);
+}
+
+.text-error {
+    color: var(--fluent-error);
+}
+
+.text-secondary {
+    color: var(--fluent-text-secondary);
+}
+
+.text-tertiary {
+    color: var(--fluent-text-tertiary);
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+/* Focus Visible (Accessibility) */
+*:focus-visible {
+    outline: 2px solid var(--fluent-accent);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   23. SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--fluent-border-default);
+    border-radius: var(--fluent-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fluent-border-strong);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--fluent-border-default) transparent;
+}
+
+/* ============================================
+   24. LOGIN INTRO ANIMATION
+   ============================================ */
+
+/* Intro Overlay - Full screen black cover */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    transition:
+        top 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        left 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Phase 1: Start rounding corners */
+.intro-overlay.rounding {
+    border-radius: 24px;
+}
+
+/* Phase 2: Shrink to match login card dimensions and position */
+.intro-overlay.shrink-to-card {
+    /* Card is 380px wide, roughly 450px tall, centered */
+    width: 380px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: var(--fluent-radius-xl);
+}
+
+.intro-overlay.intro-complete {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Intro Logo Container */
+.intro-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -2px;
+    transform: translateY(100vh);
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease;
+}
+
+.intro-logo.fly-in {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.intro-logo.fly-up {
+    transform: translateY(calc(-50vh + 80px)) scale(0.5);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Logo Parts */
+.logo-split,
+.logo-it {
+    display: inline-block;
+}
+
+.logo-hyphen {
+    display: inline-block;
+    transform: scale(0);
+    opacity: 0;
+    margin: 0 -2px;
+    color: var(--fluent-accent);
+    text-shadow: 0 0 30px rgba(96, 205, 255, 0.6);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.2s ease;
+}
+
+.logo-hyphen.pop-in {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Login Container - Hidden initially */
+.login-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-container.show-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form Containers for animation */
+.login-form-container {
+    animation: formSlideIn 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    animation-delay: 2.6s;
+    opacity: 0;
+}
+
+.login-container.show-content .login-form-container:not(.hidden) {
+    opacity: 1;
+}
+
+/* ============================================
+   25. LOGIN PAGE LAYOUT (Enhanced)
+   ============================================ */
+
+/* Visual Side Enhancement for Login */
+.visual-side {
+    width: 50%;
+    background: linear-gradient(135deg,
+            var(--fluent-accent) 0%,
+            #0078D4 50%,
+            #5C2D91 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Glass Card for Login */
+.visual-side .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: var(--space-12);
+    border-radius: var(--fluent-radius-xl);
+    z-index: 10;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.login-container.show-content .visual-side .glass-card {
+    animation: scalePop 0.4s var(--ease-standard) forwards;
+    animation-delay: 0.2s;
+}
+
+.visual-side .glass-card h1 {
+    font-size: var(--font-size-display);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    letter-spacing: -1px;
+}
+
+.visual-side .glass-card p {
+    font-size: var(--font-size-body-lg);
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* Floating Circles for Login */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    filter: blur(2px);
+}
+
+.floating-circle.c1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.15);
+    top: -100px;
+    left: -100px;
+}
+
+.floating-circle.c2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    bottom: -150px;
+    right: -100px;
+}
+
+/* Form Side */
+.form-side {
+    width: 50%;
+    background: var(--fluent-bg-solid);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: var(--space-8);
+}
+
+.form-container {
+    width: 100%;
+    max-width: 360px;
+}
+
+.form-container h2 {
+    margin-bottom: var(--space-6);
+    color: var(--fluent-text-primary);
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.switch-text {
+    margin-top: var(--space-5);
+    font-size: var(--font-size-body);
+    text-align: center;
+    color: var(--fluent-text-secondary);
+}
+
+.switch-text a {
+    color: var(--fluent-accent);
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.switch-text a:hover {
+    text-decoration: underline;
+    color: var(--fluent-accent-hover);
+}
+
+/* Alerts for Login */
+.form-side .alert {
+    padding: var(--space-3) var(--space-5);
+    margin-bottom: var(--space-5);
+    border-radius: var(--fluent-radius-md);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    font-size: var(--font-size-body);
+    font-weight: 500;
+}
+
+.alert.error {
+    background: var(--fluent-error-bg);
+    color: var(--fluent-error);
+    border: 1px solid rgba(255, 153, 164, 0.3);
+}
+
+.alert.success {
+    background: var(--fluent-success-bg);
+    color: var(--fluent-success);
+    border: 1px solid rgba(108, 203, 95, 0.3);
+}
+
+/* Form slide in animation */
+@keyframes formSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   26. POST-LOGIN DASHBOARD TRANSITION
+   ============================================ */
+
+/* Dashboard slide-in from bottom animation */
+@keyframes dashboardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-enter {
+    animation: dashboardSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Form exit animation */
+@keyframes formSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}
+
+.form-exit {
+    animation: formSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ============================================
+   27. NEW CENTERED LOGIN PAGE DESIGN
+   ============================================ */
+
+/* Login Page Body */
+.login-page-body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: #000000;
+}
+
+/* Main Login Container */
+.login-page-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-page-container.show-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gradient Background Border */
+.login-gradient-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            #00d4ff 0%,
+            #0099ff 25%,
+            #0066ff 50%,
+            #6633ff 75%,
+            #9933ff 100%);
+    z-index: 0;
+}
+
+/* Add subtle animated glow effect */
+.login-gradient-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(153, 51, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(0, 102, 255, 0.2) 0%, transparent 60%);
+    animation: gradientPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes gradientPulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Split-It Title at Top */
+.login-title {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-family: var(--font-family);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.title-split,
+.title-it {
+    color: #ffffff;
+}
+
+.title-hyphen {
+    color: #00d4ff;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+/* Dark Login Card */
+.login-card {
+    position: relative;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: var(--fluent-radius-xl);
+    padding: var(--space-10) var(--space-8);
+    width: 100%;
+    max-width: 380px;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+/* Login Form Section */
+.login-form-section {
+    width: 100%;
+}
+
+.login-form-section h2 {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--fluent-text-primary);
+    margin-bottom: var(--space-6);
+    text-align: center;
+    letter-spacing: -0.3px;
+}
+
+/* Form inputs inside login card */
+.login-card .input-group {
+    margin-bottom: var(--space-5);
+}
+
+.login-card .input-group label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    color: var(--fluent-text-secondary);
+}
+
+.login-card .input-group input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--fluent-radius-md);
+    color: var(--fluent-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    outline: none;
+    transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.login-card .input-group input:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.login-card .input-group input:focus {
+    border-color: var(--fluent-accent);
+    box-shadow: 0 0 0 2px rgba(96, 205, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.login-card .input-group input::placeholder {
+    color: var(--fluent-text-tertiary);
+}
+
+/* Button styling inside card */
+.login-card .btn-primary {
+    margin-top: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--font-size-body-lg);
+}
+
+/* Switch text inside card */
+.login-card .switch-text {
+    margin-top: var(--space-6);
+    text-align: center;
+    font-size: var(--font-size-body);
+    color: var(--fluent-text-secondary);
+}
+
+.login-card .switch-text a {
+    color: var(--fluent-accent);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.login-card .switch-text a:hover {
+    color: var(--fluent-accent-hover);
+    text-decoration: underline;
+}
+
+/* Alert styling inside login card */
+.login-card .alert {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--fluent-radius-md);
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    text-align: center;
+}
+
+.login-card .alert.error {
+    background: var(--fluent-error-bg);
+    color: var(--fluent-error);
+    border: 1px solid rgba(255, 153, 164, 0.3);
+}
+
+.login-card .alert.success {
+    background: var(--fluent-success-bg);
+    color: var(--fluent-success);
+    border: 1px solid rgba(108, 203, 95, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-card {
+        margin: 0 var(--space-4);
+        padding: var(--space-8) var(--space-6);
+    }
+
+    .login-title {
+        top: 24px;
+    }
+}
+
+/* ============================================
+   28. INTERACTIVE FLOATING SHAPES
+   ============================================ */
+
+/* Base floating shape styles */
+.floating-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transition: background 0.3s ease;
+    filter: blur(1px);
+}
+
+/* Circle shape */
+.floating-shape.circle {
+    border-radius: 50%;
+}
+
+/* Square shape */
+.floating-shape.square {
+    border-radius: 4px;
+    transform-origin: center;
+}
+
+/* Triangle shape (using borders) */
+.floating-shape.triangle {
+    background: transparent !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid rgba(0, 212, 255, 0.4);
+}
+
+/* Ensure shapes stay behind content but above gradient */
+.login-gradient-bg {
+    z-index: 0;
+}
+
+/* Interactive shapes layer - between gradient and UI */
+.interactive-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* UI elements - above everything else */
+.login-title {
+    z-index: 10;
+}
+
+.login-card {
+    z-index: 10;
+}

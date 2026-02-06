@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split-It | Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fluent.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar with Mica Effect -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Split-It</h2>
+            </div>
+            <div class="user-info animate-fade-in-up stagger-1">
+                <p>Welcome,</p>
+                <h3>{{ username }}</h3>
+            </div>
+            <ul class="nav-links">
+                <li class="active animate-fade-in-up stagger-2">
+                    <a href="#">
+                        <span>📂</span> My Groups
+                    </a>
+                </li>
+                <li class="animate-fade-in-up stagger-3">
+                    <a href="#">
+                        <span>📊</span> Activity Log (Soon)
+                    </a>
+                </li>
+            </ul>
+            <div class="logout-section animate-fade-in-up stagger-4">
+                <a href="/logout" class="btn-logout">
+                    <span>🚪</span> Log Out
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="animate-fade-in-up">
+                <h1>My Groups</h1>
+                <form action="/create_group" method="POST" class="create-group-form">
+                    <input type="text" name="group_name" placeholder="New Group Name..." required>
+                    <button type="submit" class="btn-small ripple-effect">+ Create</button>
+                </form>
+            </header>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="alert {{ category }} animate-fade-in-up">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="group-grid">
+                {% if groups %}
+                {% for group in groups %}
+                <div class="group-card animate-fade-in-up stagger-{{ loop.index }}"
+                    onclick="window.location.href='/group/{{ group.group_id }}'">
+                    <div class="card-icon">📂</div>
+                    <h3>{{ group.group_name }}</h3>
+                    <p>Created: {{ group.created_at }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="empty-state animate-fade-in-up">
+                    <h3>No groups yet!</h3>
+                    <p>Create one above to get started.</p>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Check if coming from login to trigger slide-in animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const dashboardContainer = document.querySelector('.dashboard-container');
+            const cameFromLogin = sessionStorage.getItem('splitit_intro_seen');
+
+            if (cameFromLogin) {
+                dashboardContainer.classList.add('dashboard-enter');
+                // Clear the flag after animation
+                setTimeout(() => {
+                    sessionStorage.removeItem('splitit_intro_seen');
+                }, 600);
+            }
+        });
+    </script>
+</body>
+
+</html>
